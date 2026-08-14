@@ -40,6 +40,229 @@
 
   <main class="max-w-[375px] mx-auto relative min-h-screen pb-20">
 
+    <section data-tela="principal" class="hidden">
+  <div class="h-screen w-full max-w-[375px] mx-auto flex flex-col bg-gray-50 font-sans">
+    <!-- Header com logo -->
+    <div class="bg-[#0D9488] text-white px-4 pt-6 pb-3 flex items-center justify-between shadow-md">
+      <div class="flex items-center gap-2">
+        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#F97316"/><path d="M10 16.5C10 12.9 12.9 10 16.5 10C20.1 10 23 12.9 23 16.5C23 20.1 20.1 23 16.5 23" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="16.5" cy="16.5" r="3" fill="white"/></svg>
+        <span class="text-lg font-bold tracking-tight">GoHop</span>
+      </div>
+      <button onclick="principal_togglePerfil()" class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center active:bg-white/25 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25h14.25c.966 0 1.75-.784 1.75-1.75v-7.5c0-.966-.784-1.75-1.75-1.75h-3.75a.75.75 0 00-.75.75v3.375h-7.5V12a.75.75 0 00-.75-.75H3.25C2.284 11.25 1.5 12.034 1.5 13v7.5c0 .966.784 1.75 1.75 1.75z"/></svg>
+      </button>
+    </div>
+
+    <!-- Mapa simulado -->
+    <div id="mapaPrincipal" class="relative w-full h-56 bg-[#E8F5F3] overflow-hidden shrink-0">
+      <svg class="w-full h-full" viewBox="0 0 375 220" preserveAspectRatio="xMidYMid slice">
+        <!-- Ruas -->
+        <line x1="0" y1="80" x2="375" y2="75" stroke="#D1D5DB" stroke-width="6"/>
+        <line x1="0" y1="145" x2="375" y2="150" stroke="#D1D5DB" stroke-width="5"/>
+        <line x1="100" y1="0" x2="95" y2="220" stroke="#D1D5DB" stroke-width="5"/>
+        <line x1="230" y1="0" x2="235" y2="220" stroke="#D1D5DB" stroke-width="4"/>
+        <line x1="0" y1="190" x2="375" y2="185" stroke="#D1D5DB" stroke-width="3"/>
+        <line x1="320" y1="0" x2="315" y2="220" stroke="#D1D5DB" stroke-width="3"/>
+        <!-- Blocos -->
+        <rect x="103" y="5" width="120" height="65" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <rect x="238" y="5" width="70" height="65" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <rect x="5" y="85" width="85" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <rect x="5" y="155" width="85" height="30" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <rect x="103" y="85" width="120" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <rect x="238" y="85" width="70" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
+        <!-- Parque -->
+        <rect x="103" y="155" width="120" height="50" rx="3" fill="#BBF7D0" stroke="#86EFAC" stroke-width="1"/>
+        <text x="163" y="182" text-anchor="middle" fill="#166534" font-size="9" font-family="sans-serif">Parque Ibirapuera</text>
+        <!-- Pinos -->
+        <g transform="translate(163,40)">
+          <circle r="10" fill="#0D9488" stroke="white" stroke-width="2.5"/>
+          <circle r="4" fill="white"/>
+        </g>
+        <g transform="translate(280,120)">
+          <circle r="10" fill="#F97316" stroke="white" stroke-width="2.5"/>
+          <circle r="4" fill="white"/>
+        </g>
+      </svg>
+      <!-- Overlay gradiente inferior -->
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
+    </div>
+
+    <!-- Painel de busca -->
+    <div class="flex-1 bg-white rounded-t-3xl -mt-6 relative z-10 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex flex-col overflow-hidden">
+      <div class="flex justify-center pt-2 pb-1">
+        <div class="w-10 h-1 bg-gray-300 rounded-full"></div>
+      </div>
+
+      <!-- Inputs de origem e destino -->
+      <div class="px-5 pt-1 pb-3 space-y-2">
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
+          <div class="flex flex-col items-center gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#0D9488]"></div>
+            <div class="w-0.5 h-4 bg-gray-300"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-[#F97316]"></div>
+          </div>
+          <div class="flex-1 space-y-3">
+            <div>
+              <input id="inputOrigem" type="text" value="Av. Paulista, 1578 - Bela Vista" class="w-full text-sm font-medium text-gray-800 bg-transparent outline-none" placeholder="Onde você está?"/>
+            </div>
+            <div class="relative">
+              <input id="inputDestino" type="text" placeholder="Para onde você vai?" class="w-full text-sm text-gray-500 bg-transparent outline-none placeholder:text-gray-400"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categorias de veículo -->
+      <div class="px-4 pb-2">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-1">Escolha o tipo de corrida</p>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="principal_selecionarCategoria('economico')" id="cat-economico" class="cat-btn active flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-[#0D9488] bg-[#0D9488]/5 transition-all duration-200">
+            <svg class="w-8 h-8 text-[#0D9488]" viewBox="0 0 48 48" fill="none"><rect x="6" y="22" width="36" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="12" y="16" width="24" height="6" rx="2" fill="currentColor" opacity="0.3"/><circle cx="14" cy="36" r="3.5" fill="currentColor"/><circle cx="34" cy="36" r="3.5" fill="currentColor"/></svg>
+            <span class="text-[10px] font-bold text-gray-700">Econômico</span>
+            <span class="text-[11px] font-bold text-[#0D9488]">R$ 12,40</span>
+          </button>
+          <button onclick="principal_selecionarCategoria('conforto')" id="cat-conforto" class="cat-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-200 hover:border-gray-300">
+            <svg class="w-8 h-8 text-gray-500" viewBox="0 0 48 48" fill="none"><rect x="4" y="22" width="40" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="10" y="15" width="28" height="7" rx="2" fill="currentColor" opacity="0.3"/><circle cx="12" cy="36" r="3.5" fill="currentColor"/><circle cx="36" cy="36" r="3.5" fill="currentColor"/></svg>
+            <span class="text-[10px] font-bold text-gray-700">Conforto</span>
+            <span class="text-[11px] font-bold text-gray-500">R$ 18,90</span>
+          </button>
+          <button onclick="principal_selecionarCategoria('premium')" id="cat-premium" class="cat-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-200 hover:border-gray-300">
+            <svg class="w-8 h-8 text-gray-500" viewBox="0 0 48 48" fill="none"><rect x="3" y="22" width="42" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="9" y="14" width="30" height="8" rx="2" fill="currentColor" opacity="0.3"/><circle cx="11" cy="36" r="3.5" fill="currentColor"/><circle cx="37" cy="36" r="3.5" fill="currentColor"/></svg>
+            <span class="text-[10px] font-bold text-gray-700">Premium</span>
+            <span class="text-[11px] font-bold text-gray-500">R$ 27,50</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Info da corrida -->
+      <div class="mx-4 bg-gray-50 rounded-xl p-3 flex items-center justify-between text-xs text-gray-600 border border-gray-100">
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Chegada prevista: <strong class="text-gray-800">18 min</strong></span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2.25l-1.5 5.25H5.25l4.5 3.75-1.75 5.25L12 13.5l4.25 4.5-1.75-5.25 4.5-3.75h-5.25L12 2.25z"/></svg>
+          <span>Avaliação: <strong class="text-gray-800">4,9</strong></span>
+        </div>
+      </div>
+
+      <!-- Botão de solicitar -->
+      <div class="p-4 pt-3 pb-6">
+        <button onclick="principal_solicitarCorrida()" id="btnSolicitar" class="w-full bg-[#0D9488] hover:bg-[#0F766E] active:scale-[0.98] text-white font-bold text-base py-4 rounded-2xl shadow-lg shadow-teal-200 transition-all duration-200 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+          Solicitar GoHop
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmação -->
+  <div id="modalConfirmacao" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40">
+    <div class="w-full max-w-[375px] bg-white rounded-t-3xl p-6 pb-8 animate-[slideUp_0.3s_ease-out]">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+          <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5"/></svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800">Corrida solicitada!</h3>
+          <p class="text-xs text-gray-500">Procurando motoristas próximos...</p>
+        </div>
+      </div>
+      <div id="detalhesCorrida" class="bg-gray-50 rounded-xl p-4 space-y-2.5 mb-5">
+        <div class="flex justify-between text-sm"><span class="text-gray-500">Origem</span><span class="font-medium text-gray-800 text-right max-w-[200px]">Av. Paulista, 1578</span></div>
+        <div class="w-px h-4 bg-gray-200 mx-2"></div>
+        <div class="flex justify-between text-sm"><span class="text-gray-500">Destino</span><span class="font-medium text-gray-800 text-right max-w-[200px]" id="destinoConfirmacao">Av. Paulista, 1578</span></div>
+        <div class="w-px h-4 bg-gray-200 mx-2"></div>
+        <div class="flex justify-between text-sm"><span class="text-gray-500">Categoria</span><span class="font-medium text-gray-800" id="categoriaConfirmacao">Econômico</span></div>
+        <div class="w-px h-4 bg-gray-200 mx-2"></div>
+        <div class="flex justify-between text-sm"><span class="text-gray-500">Estimativa</span><span class="font-bold text-[#0D9488]" id="precoConfirmacao">R$ 12,40</span></div>
+      </div>
+      <button onclick="principal_fecharModal()" class="w-full bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold py-3.5 rounded-2xl transition active:scale-[0.98]">
+        Acompanhar corrida
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de perfil -->
+  <div id="modalPerfil" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40">
+    <div class="w-full max-w-[375px] bg-white rounded-t-3xl p-6 pb-8">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="w-14 h-14 rounded-full bg-[#0D9488] flex items-center justify-center text-white text-xl font-bold">MS</div>
+        <div>
+          <h3 class="text-base font-bold text-gray-800">Marcos Silva</h3>
+          <p class="text-xs text-gray-500">marcos.silva@email.com</p>
+          <p class="text-xs text-gray-400">(11) 99876-5432</p>
+        </div>
+      </div>
+      <div class="space-y-1">
+        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 6v11.25A2.25 2.25 0 004.5 19.5z"/></svg> Formas de pagamento
+        </button>
+        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003 1.008c-.253.255-.427.577-.476.914l-.237 1.341c-.041.225.144.443.378.478.234.035.468-.07.644-.248l1.174-1.165a1.125 1.125 0 011.37-.49l1.296 2.247M15 9.75l-3-3m0 0l-3 3m3-3v6m0-6H9m3.75 0h3.75"/></svg> Endereços salvos
+        </button>
+        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg> Central de ajuda
+        </button>
+        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-red-600 transition">
+          <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/></svg> Sair
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .cat-btn.active { border-color: #0D9488; background: rgba(13,148,136,0.05); }
+  </style>
+
+  <script>
+    const precos = { economico: 'R$ 12,40', conforto: 'R$ 18,90', premium: 'R$ 27,50' };
+    const labels = { economico: 'Econômico', conforto: 'Conforto', premium: 'Premium' };
+    let categoriaAtual = 'economico';
+
+    function principal_selecionarCategoria(cat) {
+      categoriaAtual = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.add('border-gray-200', 'bg-white');
+        b.classList.remove('border-[#0D9488]', 'bg-[#0D9488]/5');
+        b.querySelector('svg').classList.remove('text-[#0D9488]');
+        b.querySelector('svg').classList.add('text-gray-500');
+        b.querySelectorAll('span').forEach(s => { s.classList.remove('text-[#0D9488]'); s.classList.add('text-gray-500'); });
+      });
+      const btn = document.getElementById('cat-' + cat);
+      btn.classList.add('active');
+      btn.classList.remove('border-gray-200', 'bg-white');
+      btn.classList.add('border-[#0D9488]', 'bg-[#0D9488]/5');
+      btn.querySelector('svg').classList.remove('text-gray-500');
+      btn.querySelector('svg').classList.add('text-[#0D9488]');
+      btn.querySelectorAll('span').forEach(s => { s.classList.remove('text-gray-500'); s.classList.add('text-[#0D9488]'); });
+    }
+
+    function principal_solicitarCorrida() {
+      const origem = document.getElementById('inputOrigem').value || 'Av. Paulista, 1578 - Bela Vista';
+      const destino = document.getElementById('inputDestino').value || 'Não informado';
+      document.getElementById('destinoConfirmacao').textContent = destino;
+      document.getElementById('categoriaConfirmacao').textContent = labels[categoriaAtual];
+      document.getElementById('precoConfirmacao').textContent = precos[categoriaAtual];
+      document.getElementById('modalConfirmacao').classList.remove('hidden');
+    }
+
+    function principal_fecharModal() {
+      document.getElementById('modalConfirmacao').classList.add('hidden');
+    }
+
+    function principal_togglePerfil() {
+      document.getElementById('modalPerfil').classList.remove('hidden');
+    }
+
+    function principal_fecharPerfil() {
+      document.getElementById('modalPerfil').classList.add('hidden');
+    }
+  </script>
+</section>
+
     <!-- TELAS -->
 
   </main>
