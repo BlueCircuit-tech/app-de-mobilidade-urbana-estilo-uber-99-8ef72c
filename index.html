@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VoaApp — Mobilidade Urbana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            marca: { 50: '#e6fbff', 100: '#ccf7ff', 200: '#99efff', 300: '#66e7ff', 400: '#33dfff', 500: '#00d6f0', 600: '#00adb8', 700: '#00858e', 800: '#005d63', 900: '#003438' },
+            noite: { 50: '#f0f0f5', 100: '#d1d1de', 200: '#a3a3bf', 300: '#75759e', 400: '#47477d', 500: '#32305e', 600: '#252544', 700: '#1a1a32', 800: '#101020', 900: '#0a0a14' },
+            acento: '#ff6b4a',
+            acentoHover: '#e55a3a',
+            success: '#22c55e',
+            warning: '#f59e0b',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Outfit', system-ui, sans-serif; overscroll-behavior: none; }
+    .nav-item { transition: color 0.2s, transform 0.15s; }
+    .nav-item:active { transform: scale(0.92); }
+    .nav-item.ativo { color: #00d6f0; }
+    .nav-item:not(.ativo) { color: #a3a3bf; }
+    .nav-item .nav-icon-wrapper { transition: background 0.2s; }
+    .nav-item.ativo .nav-icon-wrapper { background: rgba(0, 214, 240, 0.15); }
+  </style>
+</head>
+<body class="bg-noite-900 text-white min-h-screen">
+
+  <main class="max-w-[375px] mx-auto relative min-h-screen pb-20">
+
+    <!-- TELAS -->
+
+  </main>
+
+  <!-- Navegação inferior estilo app -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50">
+    <div class="max-w-[375px] mx-auto bg-noite-800/85 backdrop-blur-xl border-t border-white/10 px-2 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+      <div class="flex items-center justify-around">
+        <button data-nav="principal" onclick="mostrarTela('principal')" class="nav-item ativo flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
+          <div class="nav-icon-servicep-1.5 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="text-[10px] font-medium">Início</span>
+        </button>
+        <button data-nav="corridas" onclick="mostrarTela('corridas')" class="nav-item flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
+          <div class="nav-icon-servicep-1.5 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <span class="text-[10px] font-medium">Corridas</span>
+        </button>
+        <button data-nav="perfil" onclick="mostrarTela('perfil')" class="nav-item flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
+          <div class="nav-icon-servicep-1.5 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <span class="text-[10px] font-medium">Perfil</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function mostrarTela(id) {
+      document.querySelectorAll('[data-tela]').forEach(function(s) {
+        s.classList.toggle('hidden', s.dataset.tela !== id);
+      });
+      document.querySelectorAll('[data-nav]').forEach(function(b) {
+        b.classList.toggle('ativo', b.dataset.nav === id);
+      });
+      window.scrollTo({ top: 0 });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      mostrarTela('principal');
+    });
+  </script>
+
+</body>
+</html>
