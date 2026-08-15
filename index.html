@@ -1850,6 +1850,262 @@
     </script>
 </section>
 
+    <section data-tela="chat-passageiro-motorista" class="hidden">
+    <div class="h-[800px] w-[375px] mx-auto bg-gray-50 flex flex-col relative overflow-hidden">
+        <!-- Header do Chat -->
+        <div class="bg-white px-4 pt-4 pb-3 flex items-center gap-3 shadow-sm z-10">
+            <button onclick="mostrarTela('buscando-acompanhamento-no-mapa')" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+            </button>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00E676] to-[#00C853] flex items-center justify-center flex-shrink-0 shadow-md">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h2 class="text-sm font-bold text-gray-900 truncate">Carlos Eduardo</h2>
+                <p class="text-xs text-gray-500 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-[#00E676] rounded-full inline-block"></span>
+                    On-line · Corrida em andamento
+                </p>
+            </div>
+            <button onclick="chat_passageiro_motorista_ligar()" class="w-10 h-10 flex items-center justify-center rounded-full bg-[#00E676]/10 hover:bg-[#00E676]/20 active:scale-95 transition-all flex-shrink-0">
+                <svg class="w-5 h-5 text-[#00C853]" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+            </button>
+        </div>
+
+        <!-- Status da corrida -->
+        <div class="bg-gradient-to-r from-[#0D1117] to-[#1a2332] mx-4 mt-3 rounded-xl px-4 py-3 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-[#00E676]/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-[#00E676]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-white text-xs font-medium">Você está a <span class="text-[#00E676] font-bold">2 min</span> do destino</p>
+                <p class="text-gray-400 text-[10px]">R. Augusta, 1500 — Jardins, SP</p>
+            </div>
+            <button onclick="mostrarTela('buscando-acompanhamento-no-mapa')" class="text-[10px] text-[#00E676] font-semibold hover:underline flex-shrink-0">Ver mapa</button>
+        </div>
+
+        <!-- Área de mensagens -->
+        <div id="chat-mensagens" class="flex-1 overflow-y-auto px-4 py-4 space-y-3 scroll-smooth">
+            <!-- Mensagem do sistema -->
+            <div class="flex justify-center">
+                <span class="text-[10px] text-gray-400 bg-gray-200/80 px-3 py-1 rounded-full">Hoje, 14:32</span>
+            </div>
+
+            <!-- Mensagem do motorista -->
+            <div class="flex items-start gap-2 chat-msg-anim">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00E676] to-[#00C853] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="text-white text-[10px] font-bold">CE</span>
+                </div>
+                <div>
+                    <div class="bg-white border border-gray-100 rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                        <p class="text-sm text-gray-800 leading-relaxed">Olá! Sou o Carlos, seu motorista. Estou a caminho do ponto de embarque 🚗</p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-0.5 ml-1">14:32</span>
+                </div>
+            </div>
+
+            <!-- Mensagem do passageiro -->
+            <div class="flex items-start gap-2 justify-end chat-msg-anim">
+                <div>
+                    <div class="bg-[#0D1117] rounded-2xl rounded-tr-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                        <p class="text-sm text-white leading-relaxed">Oi Carlos! Estou na portaria do prédio, de blusa vermelha.</p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-0.5 mr-1 block text-right">14:33</span>
+                </div>
+            </div>
+
+            <!-- Mensagem do motorista -->
+            <div class="flex items-start gap-2 chat-msg-anim">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00E676] to-[#00C853] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="text-white text-[10px] font-bold">CE</span>
+                </div>
+                <div>
+                    <div class="bg-white border border-gray-100 rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                        <p class="text-sm text-gray-800 leading-relaxed">Perfeito! Te achei. Estou estacionando o Corsa prata na calçada. <span class="text-lg">👋</span></p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-0.5 ml-1">14:34</span>
+                </div>
+            </div>
+
+            <!-- Aviso do sistema -->
+            <div class="flex justify-center">
+                <div class="bg-[#00E676]/10 rounded-full px-3 py-1.5 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-[#00C853]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="text-[10px] text-[#1B5E20] font-medium">Carlos iniciou a corrida</span>
+                </div>
+            </div>
+
+            <!-- Mensagem do motorista -->
+            <div class="flex items-start gap-2 chat-msg-anim">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00E676] to-[#00C853] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="text-white text-[10px] font-bold">CE</span>
+                </div>
+                <div>
+                    <div class="bg-white border border-gray-100 rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                        <p class="text-sm text-gray-800 leading-relaxed">Tudo certo por aqui? O trânsito está fluindo bem pela Paulista 🚦</p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-0.5 ml-1">14:36</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Respostas rápidas -->
+        <div id="chat-respostas-rapidas" class="px-4 pb-2">
+            <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+                <button onclick="chat_passageiro_motorista_resposta_rapida('Está tudo certo, obrigado!')" class="flex-shrink-0 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-full hover:border-[#00C853] hover:text-[#1B5E20] active:scale-95 transition-all shadow-sm">👍 Está tudo certo</button>
+                <button onclick="chat_passageiro_motorista_resposta_rapida('Pode acelerar um pouco, por favor')" class="flex-shrink-0 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-full hover:border-[#00C853] hover:text-[#1B5E20] active:scale-95 transition-all shadow-sm">⏩ Acelerar</button>
+                <button onclick="chat_passageiro_motorista_resposta_rapida('Pode pegar um atalho, por favor')" class="flex-shrink-0 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-full hover:border-[#00C853] hover:text-[#1B5E20] active:scale-95 transition-all shadow-sm">🗺️ Atalho</button>
+                <button onclick="chat_passageiro_motorista_resposta_rapida('Já estou no destino, obrigado!')" class="flex-shrink-0 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-full hover:border-[#00C853] hover:text-[#1B5E20] active:scale-95 transition-all shadow-sm">🏁 Destino</button>
+                <button onclick="chat_passageiro_motorista_resposta_rapida('Aguarde um momento, por favor')" class="flex-shrink-0 bg-white border border-gray-200 text-gray-700 text-xs font-medium px-3.5 py-2 rounded-full hover:border-[#00C853] hover:text-[#1B5E20] active:scale-95 transition-all shadow-sm">⏸️ Aguardar</button>
+            </div>
+        </div>
+
+        <!-- Input de mensagem -->
+        <div class="bg-white border-t border-gray-100 px-3 pt-2 pb-5">
+            <div class="flex items-center gap-2">
+                <button onclick="chat_passageiro_motorista_anexar()" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all flex-shrink-0">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="flex-1 relative">
+                    <input
+                        type="text"
+                        id="chat-input-mensagem"
+                        placeholder="Digite uma mensagem..."
+                        class="w-full bg-gray-100 text-sm text-gray-900 placeholder-gray-400 rounded-full px-4 py-2.5 pr-10 outline-none focus:ring-2 focus:ring-[#00C853]/30 focus:bg-white transition-all"
+                        onkeydown="if(event.key==='Enter') chat_passageiro_motorista_enviar()"
+                    />
+                    <button onclick="chat_passageiro_motorista_enviar()" id="chat-btn-enviar" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#0D1117] hover:bg-[#1a2332] active:scale-90 transition-all flex-shrink-0 opacity-50 cursor-not-allowed" disabled>
+                        <svg class="w-4 h-4 text-[#00E676]" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2.01L2.01 21z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast de notificação -->
+        <div id="chat-toast" class="absolute top-20 left-4 right-4 bg-[#0D1117] text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-xl transform -translate-y-4 opacity-0 transition-all duration-300 pointer-events-none z-50 flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#00E676] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="chat-toast-text">Mensagem enviada!</span>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const chatInput = document.getElementById('chat-input-mensagem');
+        const chatBtnEnviar = document.getElementById('chat-btn-enviar');
+        const chatMensagens = document.getElementById('chat-mensagens');
+        const chatToast = document.getElementById('chat-toast');
+        const chatToastText = document.getElementById('chat-toast-text');
+
+        // Habilita/desabilita botão de envio conforme input
+        chatInput.addEventListener('input', function() {
+            const temTexto = this.value.trim().length > 0;
+            chatBtnEnviar.disabled = !temTexto;
+            chatBtnEnviar.classList.toggle('opacity-50', !temTexto);
+            chatBtnEnviar.classList.toggle('cursor-not-allowed', !temTexto);
+            chatBtnEnviar.classList.toggle('opacity-100', temTexto);
+            chatBtnEnviar.classList.toggle('cursor-pointer', temTexto);
+        });
+
+        function chat_passageiro_motorista_enviar() {
+            const texto = chatInput.value.trim();
+            if (!texto) return;
+
+            const hora = new Date();
+            const horaStr = hora.getHours().toString().padStart(2, '0') + ':' + hora.getMinutes().toString().padStart(2, '0');
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex items-start gap-2 justify-end chat-msg-anim';
+            msgDiv.innerHTML = `
+                <div>
+                    <div class="bg-[#0D1117] rounded-2xl rounded-tr-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                        <p class="text-sm text-white leading-relaxed">${chat_passageiro_motorista_escapar_html(texto)}</p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-0.5 mr-1 block text-right">${horaStr}</span>
+                </div>
+            `;
+            chatMensagens.appendChild(msgDiv);
+            chatInput.value = '';
+            chatBtnEnviar.disabled = true;
+            chatBtnEnviar.classList.add('opacity-50', 'cursor-not-allowed');
+            chatBtnEnviar.classList.remove('opacity-100', 'cursor-pointer');
+
+            // Scroll para a última mensagem
+            chatMensagens.scrollTop = chatMensagens.scrollHeight;
+
+            // Simula resposta automática do motorista após 1.5s
+            chat_passageiro_motorista_simular_resposta();
+        }
+
+        function chat_passageiro_motorista_resposta_rapida(texto) {
+            chatInput.value = texto;
+            chat_passageiro_motorista_enviar();
+        }
+
+        function chat_passageiro_motorista_simular_resposta() {
+            const respostas = [
+                'Sem problema! 👍',
+                'Ok, combinado!',
+                'Perfeito, já estou por aqui.',
+                'Entendi! Um minutinho...',
+                'Tudo certo, pode deixar!'
+            ];
+            const resposta = respostas[Math.floor(Math.random() * respostas.length)];
+            const tempo = 1200 + Math.random() * 1500;
+
+            setTimeout(() => {
+                const hora = new Date();
+                const horaStr = hora.getHours().toString().padStart(2, '0') + ':' + hora.getMinutes().toString().padStart(2, '0');
+
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'flex items-start gap-2 chat-msg-anim';
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00E676] to-[#00C853] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-white text-[10px] font-bold">CE</span>
+                    </div>
+                    <div>
+                        <div class="bg-white border border-gray-100 rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm max-w-[240px]">
+                            <p class="text-sm text-gray-800 leading-relaxed">${chat_passageiro_motorista_escapar_html(resposta)}</p>
+                        </div>
+                        <span class="text-[10px] text-gray-400 mt-0.5 ml-1">${horaStr}</span>
+                    </div>
+                `;
+                chatMensagens.appendChild(msgDiv);
+                chatMensagens.scrollTop = chatMensagens.scrollHeight;
+                chat_passageiro_motorista_mostrar_toast('Carlis Eduardo respondeu');
+            }, tempo);
+        }
+
+        function chat_passageiro_motorista_ligar() {
+            chat_passageiro_motorista_mostrar_toast('Ligando para Carlos Eduardo...');
+        }
+
+        function chat_passageiro_motorista_anexar() {
+            chat_passageiro_motorista_mostrar_toast('Anexos em breve');
+        }
+
+        function chat_passageiro_motorista_mostrar_toast(texto) {
+            chatToastText.textContent = texto;
+            chatToast.classList.remove('-translate-y-4', 'opacity-0');
+            chatToast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                chatToast.classList.add('-translate-y-4', 'opacity-0');
+                chatToast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2000);
+        }
+
+        function chat_passageiro_motorista_escapar_html(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Scroll inicial para o fim
+        setTimeout(() => {
+            chatMensagens.scrollTop = chatMensagens.scrollHeight;
+        }, 100);
+    </script>
+</section>
+
     <!-- TELAS -->
         </main>
     </div>
