@@ -266,7 +266,292 @@
 
         <!-- Conteúdo principal — telas são injetadas aqui -->
         <main>
-            <!-- TELAS -->
+            <section data-tela="onboarding-splash-com-identidade-visual" class="hidden">
+      <div id="onboarding-app" class="relative w-[375px] h-screen overflow-hidden bg-white select-none">
+        <!-- Slides container -->
+        <div id="onboarding-slides" class="flex transition-transform duration-500 ease-out h-full" style="width: 1125px; transform: translateX(0px);">
+          <!-- Slide 1: Logo reveal -->
+          <div class="w-[375px] h-full flex-shrink-0 flex flex-col items-center justify-center bg-[#0B1E2D] relative px-8">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 40%, #00E5A0 0%, transparent 50%), radial-gradient(circle at 70% 70%, #FF6B35 0%, transparent 40%);"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <!-- Logo Icon -->
+              <div class="w-28 h-28 rounded-3xl bg-gradient-to-br from-[#00E5A0] to-[#00B87A] flex items-center justify-center shadow-2xl shadow-[#00E5A0]/30 mb-6" id="logo-icon">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <circle cx="28" cy="28" r="26" stroke="#0B1E2D" stroke-width="2.5" fill="none" opacity="0.3"/>
+                  <path d="M18 34C18 34 20 28 28 28C36 28 38 34 38 34" stroke="#0B1E2D" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="22" cy="22" r="2.5" fill="#0B1E2D"/>
+                  <circle cx="34" cy="22" r="2.5" fill="#0B1E2D"/>
+                  <path d="M28 8L30 16H26L28 8Z" fill="#FF6B35"/>
+                  <circle cx="28" cy="6" r="2.5" fill="#FF6B35"/>
+                </svg>
+              </div>
+              <h1 class="text-4xl font-black text-white tracking-tight" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                Vai<span class="text-[#00E5A0]">Rápido</span>
+              </h1>
+              <p class="text-white/40 text-sm mt-3 font-medium tracking-widest uppercase" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                Mobilidade urbana inteligente
+              </p>
+              <div class="flex gap-2 mt-8">
+                <div class="w-2 h-2 rounded-full bg-[#00E5A0]"></div>
+                <div class="w-2 h-2 rounded-full bg-white/20"></div>
+                <div class="w-2 h-2 rounded-full bg-white/20"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Brand Colors -->
+          <div class="w-[375px] h-full flex-shrink-0 flex flex-col items-center justify-center bg-white relative px-8">
+            <div class="flex flex-col items-center w-full">
+              <p class="text-[#0B1E2D]/30 text-xs font-bold tracking-[0.3em] uppercase mb-8" style="font-family: 'Segoe UI', system-ui, sans-serif;">Nossa identidade</p>
+
+              <!-- Color Palette Display -->
+              <div class="flex gap-3 mb-10">
+                <div class="flex flex-col items-center">
+                  <div class="w-14 h-14 rounded-2xl bg-[#0B1E2D] shadow-lg shadow-[#0B1E2D]/20"></div>
+                  <span class="text-[10px] text-[#0B1E2D]/40 mt-1.5 font-mono">#0B1E2D</span>
+                  <span class="text-[9px] text-[#0B1E2D]/25">Azul Marinho</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-14 h-14 rounded-2xl bg-[#00E5A0] shadow-lg shadow-[#00E5A0]/20"></div>
+                  <span class="text-[10px] text-[#0B1E2D]/40 mt-1.5 font-mono">#00E5A0</span>
+                  <span class="text-[9px] text-[#0B1E2D]/25">Verde Menta</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-14 h-14 rounded-2xl bg-[#FF6B35] shadow-lg shadow-[#FF6B35]/20"></div>
+                  <span class="text-[10px] text-[#0B1E2D]/40 mt-1.5 font-mono">#FF6B35</span>
+                  <span class="text-[9px] text-[#0B1E2D]/25">Laranja</span>
+                </div>
+              </div>
+
+              <!-- Brand Values -->
+              <div class="w-full space-y-3">
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-[#0B1E2D]/[0.03] border border-[#0B1E2D]/[0.06]">
+                  <div class="w-10 h-10 rounded-xl bg-[#00E5A0]/10 flex items-center justify-center flex-shrink-0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#0B1E2D] text-sm font-bold">Rapidez</p>
+                    <p class="text-[#0B1E2D]/40 text-xs">Conexão instantânea entre passageiro e motorista</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-[#0B1E2D]/[0.03] border border-[#0B1E2D]/[0.06]">
+                  <div class="w-10 h-10 rounded-xl bg-[#FF6B35]/10 flex items-center justify-center flex-shrink-0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#0B1E2D] text-sm font-bold">Segurança</p>
+                    <p class="text-[#0B1E2D]/40 text-xs">Motoristas verificados e rota compartilhada</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-[#0B1E2D]/[0.03] border border-[#0B1E2D]/[0.06]">
+                  <div class="w-10 h-10 rounded-xl bg-[#0B1E2D]/5 flex items-center justify-center flex-shrink-0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B1E2D" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#0B1E2D] text-sm font-bold">Conforto</p>
+                    <p class="text-[#0B1E2D]/40 text-xs">Preço justo e experiência premium</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-2 mt-8">
+                <div class="w-2 h-2 rounded-full bg-[#0B1E2D]/15"></div>
+                <div class="w-2 h-2 rounded-full bg-[#00E5A0]"></div>
+                <div class="w-2 h-2 rounded-full bg-[#0B1E2D]/15"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: CTA / Get Started -->
+          <div class="w-[375px] h-full flex-shrink-0 flex flex-col items-center justify-center bg-[#0B1E2D] relative px-8">
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 80% 20%, #FF6B35 0%, transparent 50%), radial-gradient(circle at 20% 80%, #00E5A0 0%, transparent 40%);"></div>
+
+            <!-- Decorative circles -->
+            <div class="absolute top-16 right-8 w-24 h-24 rounded-full border border-white/5"></div>
+            <div class="absolute bottom-32 left-4 w-16 h-16 rounded-full border border-[#00E5A0]/10"></div>
+
+            <div class="relative z-10 flex flex-col items-center text-center">
+              <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+                <svg width="40" height="40" viewBox="0 0 56 56" fill="none">
+                  <path d="M18 34C18 34 20 28 28 28C36 28 38 34 38 34" stroke="#00E5A0" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="22" cy="22" r="2.5" fill="#00E5A0"/>
+                  <circle cx="34" cy="22" r="2.5" fill="#00E5A0"/>
+                  <path d="M28 8L30 16H26L28 8Z" fill="#FF6B35"/>
+                  <circle cx="28" cy="6" r="2.5" fill="#FF6B35"/>
+                </svg>
+              </div>
+
+              <h2 class="text-3xl font-black text-white leading-tight" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                Pronto para<br/>sua primeira<br/><span class="text-[#FF6B35]">viagem?</span>
+              </h2>
+
+              <p class="text-white/40 text-sm mt-4 max-w-[260px] leading-relaxed" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                Cadastre-se em segundos e peça sua corrida em menos de 1 minuto.
+              </p>
+
+              <button onclick="mostrarTela('login-cadastro')" class="mt-8 w-full py-4 bg-gradient-to-r from-[#00E5A0] to-[#00C98B] text-[#0B1E2D] font-bold text-base rounded-2xl shadow-lg shadow-[#00E5A0]/25 active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                <span>Criar minha conta</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+              <button onclick="mostrarTela('login-cadastro')" class="mt-3 text-white/30 text-sm hover:text-white/50 transition-colors" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+                Já tenho conta · Entrar
+              </button>
+
+              <div class="flex gap-2 mt-10">
+                <div class="w-2 h-2 rounded-full bg-white/15"></div>
+                <div class="w-2 h-2 rounded-full bg-white/15"></div>
+                <div class="w-2 h-2 rounded-full bg-[#FF6B35]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation buttons (overlay) -->
+        <div class="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+          <!-- Slide 1 & 2: Skip + Next -->
+          <div id="onboarding-nav-early" class="flex items-center justify-between px-6 pb-8 pt-4 bg-gradient-to-t from-black/40 to-transparent">
+            <button onclick="onboarding_splash_com_identidade_visual_pular()" class="pointer-events-auto text-white/50 text-sm font-medium hover:text-white transition-colors py-2" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+              Pular
+            </button>
+            <button onclick="onboarding_splash_com_identidade_visual_proximo()" class="pointer-events-auto w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 active:scale-90 transition-all duration-200 backdrop-blur-sm">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Back button (appears on slide 2) -->
+        <button id="onboarding-back-btn" onclick="onboarding_splash_com_identidade_visual_anterior()" class="absolute top-12 left-4 z-20 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-sm border border-white/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <!-- Slide counter -->
+        <div id="onboarding-counter" class="absolute top-12 right-4 z-20 text-white/30 text-xs font-bold tracking-wider" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+          1 / 3
+        </div>
+
+        <!-- Toast -->
+        <div id="onboarding-toast" class="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-[#0B1E2D] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xl opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap" style="font-family: 'Segoe UI', system-ui, sans-serif;">
+          <span id="onboarding-toast-msg"></span>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var currentSlide = 0;
+          const totalSlides = 3;
+          let isTransitioning = false;
+
+          function showToast(msg) {
+            var toast = document.getElementById('onboarding-toast');
+            var toastMsg = document.getElementById('onboarding-toast-msg');
+            toastMsg.textContent = msg;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            setTimeout(function() {
+              toast.style.opacity = '0';
+              toast.style.transform = 'translateX(-50%) translateY(-10px)';
+            }, 2000);
+          }
+
+          function updateUI() {
+            var slidesContainer = document.getElementById('onboarding-slides');
+            slidesContainer.style.transform = 'translateX(-' + (currentSlide * 375) + 'px)';
+
+            var counter = document.getElementById('onboarding-counter');
+            counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+
+            var backBtn = document.getElementById('onboarding-back-btn');
+            var navEarly = document.getElementById('onboarding-nav-early');
+
+            if (currentSlide === 0) {
+              backBtn.style.opacity = '0';
+              backBtn.style.pointerEvents = 'none';
+              navEarly.style.opacity = '1';
+              navEarly.style.pointerEvents = 'auto';
+            } else if (currentSlide === 1) {
+              backBtn.style.opacity = '1';
+              backBtn.style.pointerEvents = 'auto';
+              navEarly.style.opacity = '1';
+              navEarly.style.pointerEvents = 'auto';
+            } else {
+              backBtn.style.opacity = '1';
+              backBtn.style.pointerEvents = 'auto';
+              navEarly.style.opacity = '0';
+              navEarly.style.pointerEvents = 'none';
+            }
+          }
+
+          window.onboarding_splash_com_identidade_visual_proximo = function() {
+            if (isTransitioning) return;
+            if (currentSlide < totalSlides - 1) {
+              isTransitioning = true;
+              currentSlide++;
+              updateUI();
+              setTimeout(function() { isTransitioning = false; }, 550);
+            }
+          };
+
+          window.onboarding_splash_com_identidade_visual_anterior = function() {
+            if (isTransitioning) return;
+            if (currentSlide > 0) {
+              isTransitioning = true;
+              currentSlide--;
+              updateUI();
+              setTimeout(function() { isTransitioning = false; }, 550);
+            }
+          };
+
+          window.onboarding_splash_com_identidade_visual_pular = function() {
+            showToast('Saltando para cadastro →');
+            setTimeout(function() {
+              mostrarTela('login-cadastro');
+            }, 400);
+          };
+
+          // Touch/swipe support
+          var touchStartX = 0;
+          var touchEndX = 0;
+          var appEl = document.getElementById('onboarding-app');
+
+          appEl.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+
+          appEl.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 60) {
+              if (diff > 0) {
+                onboarding_splash_com_identidade_visual_proximo();
+              } else {
+                onboarding_splash_com_identidade_visual_anterior();
+              }
+            }
+          }, { passive: true });
+
+          // Keyboard support
+          document.addEventListener('keydown', function(e) {
+            if (document.getElementById('onboarding-app').offsetParent === null) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+              e.preventDefault();
+              if (currentSlide === totalSlides - 1) {
+                mostrarTela('login-cadastro');
+              } else {
+                onboarding_splash_com_identidade_visual_proximo();
+              }
+            } else if (e.key === 'ArrowLeft') {
+              onboarding_splash_com_identidade_visual_anterior();
+            }
+          });
+
+          // Show this screen
+          mostrarTela('onboarding-splash-com-identidade-visual');
+        })();
+      </script>
+    </section>
+
+    <!-- TELAS -->
         </main>
     </div>
 
