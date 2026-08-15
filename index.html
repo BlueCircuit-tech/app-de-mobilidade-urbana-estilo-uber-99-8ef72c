@@ -1,312 +1,289 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VoaApp — Mobilidade Urbana</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
-          colors: {
-            marca: { 50: '#e6fbff', 100: '#ccf7ff', 200: '#99efff', 300: '#66e7ff', 400: '#33dfff', 500: '#00d6f0', 600: '#00adb8', 700: '#00858e', 800: '#005d63', 900: '#003438' },
-            noite: { 50: '#f0f0f5', 100: '#d1d1de', 200: '#a3a3bf', 300: '#75759e', 400: '#47477d', 500: '#32305e', 600: '#252544', 700: '#1a1a32', 800: '#101020', 900: '#0a0a14' },
-            acento: '#ff6b4a',
-            acentoHover: '#e55a3a',
-            success: '#22c55e',
-            warning: '#f59e0b',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VaiBem — Mobilidade Urbana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        marca: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        escuro: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        accent: {
+                            DEFAULT: '#f59e0b',
+                            light: '#fbbf24',
+                            dark: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    * { -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Outfit', system-ui, sans-serif; overscroll-behavior: none; }
-    .nav-item { transition: color 0.2s, transform 0.15s; }
-    .nav-item:active { transform: scale(0.92); }
-    .nav-item.ativo { color: #00d6f0; }
-    .nav-item:not(.ativo) { color: #a3a3bf; }
-    .nav-item .nav-icon-wrapper { transition: background 0.2s; }
-    .nav-item.ativo .nav-icon-wrapper { background: rgba(0, 214, 240, 0.15); }
-  </style>
+    </script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f1f5f9;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none;
+        }
+
+        #app-frame {
+            max-width: 375px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background: #f8fafc;
+            box-shadow: 0 0 40px rgba(0,0,0,0.08);
+        }
+
+        .tela {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .nav-item {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-item.ativo {
+            color: #059669;
+            position: relative;
+        }
+
+        .nav-item.ativo::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            background: #059669;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .nav-item:not(.ativo) {
+            color: #94a3b8;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .btn-marca {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            font-weight: 600;
+            border-radius: 14px;
+            padding: 14px 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-marca:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-marca:active {
+            transform: translateY(0);
+        }
+
+        .card-touch {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .card-touch:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-touch:active {
+            transform: scale(0.98);
+        }
+
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse-ring 1.5s ease-out infinite;
+            z-index: -1;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            background: white;
+            color: #1e293b;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .input-field::placeholder {
+            color: #94a3b8;
+        }
+    </style>
 </head>
-<body class="bg-noite-900 text-white min-h-screen">
+<body class="bg-gray-200">
+    <div id="app-frame">
+        <!-- Navegação Inferior (estilo app mobile) -->
+        <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[375px] z-50 bg-white border-t border-gray-100" style="padding-bottom: env(safe-area-inset-bottom);">
+            <div class="flex items-center justify-around py-2 px-2">
+                <button class="nav-item ativo flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="onboarding-splash-com-identidade-visual"
+                        onclick="mostrarTela('onboarding-splash-com-identidade-visual')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Início</span>
+                </button>
 
-  <main class="max-w-[375px] mx-auto relative min-h-screen pb-20">
+                <button class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="login-cadastro"
+                        onclick="mostrarTela('login-cadastro')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25h15a1.5 1.5 0 001.5-1.5V18a5.25 5.25 0 00-10.5 0v.75a1.5 1.5 0 01-1.5 1.5H4.5z"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Entrar</span>
+                </button>
 
-    <section data-tela="principal" class="hidden">
-  <div class="h-screen w-full max-w-[375px] mx-auto flex flex-col bg-gray-50 font-sans">
-    <!-- Header com logo -->
-    <div class="bg-[#0D9488] text-white px-4 pt-6 pb-3 flex items-center justify-between shadow-md">
-      <div class="flex items-center gap-2">
-        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#F97316"/><path d="M10 16.5C10 12.9 12.9 10 16.5 10C20.1 10 23 12.9 23 16.5C23 20.1 20.1 23 16.5 23" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="16.5" cy="16.5" r="3" fill="white"/></svg>
-        <span class="text-lg font-bold tracking-tight">GoHop</span>
-      </div>
-      <button onclick="principal_togglePerfil()" class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center active:bg-white/25 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25h14.25c.966 0 1.75-.784 1.75-1.75v-7.5c0-.966-.784-1.75-1.75-1.75h-3.75a.75.75 0 00-.75.75v3.375h-7.5V12a.75.75 0 00-.75-.75H3.25C2.284 11.25 1.5 12.034 1.5 13v7.5c0 .966.784 1.75 1.75 1.75z"/></svg>
-      </button>
-    </div>
+                <button class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="home-do-passageiro-solicitar-corrida"
+                        onclick="mostrarTela('home-do-passageiro-solicitar-corrida')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Corrida</span>
+                </button>
 
-    <!-- Mapa simulado -->
-    <div id="mapaPrincipal" class="relative w-full h-56 bg-[#E8F5F3] overflow-hidden shrink-0">
-      <svg class="w-full h-full" viewBox="0 0 375 220" preserveAspectRatio="xMidYMid slice">
-        <!-- Ruas -->
-        <line x1="0" y1="80" x2="375" y2="75" stroke="#D1D5DB" stroke-width="6"/>
-        <line x1="0" y1="145" x2="375" y2="150" stroke="#D1D5DB" stroke-width="5"/>
-        <line x1="100" y1="0" x2="95" y2="220" stroke="#D1D5DB" stroke-width="5"/>
-        <line x1="230" y1="0" x2="235" y2="220" stroke="#D1D5DB" stroke-width="4"/>
-        <line x1="0" y1="190" x2="375" y2="185" stroke="#D1D5DB" stroke-width="3"/>
-        <line x1="320" y1="0" x2="315" y2="220" stroke="#D1D5DB" stroke-width="3"/>
-        <!-- Blocos -->
-        <rect x="103" y="5" width="120" height="65" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <rect x="238" y="5" width="70" height="65" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <rect x="5" y="85" width="85" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <rect x="5" y="155" width="85" height="30" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <rect x="103" y="85" width="120" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <rect x="238" y="85" width="70" height="55" rx="3" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="1"/>
-        <!-- Parque -->
-        <rect x="103" y="155" width="120" height="50" rx="3" fill="#BBF7D0" stroke="#86EFAC" stroke-width="1"/>
-        <text x="163" y="182" text-anchor="middle" fill="#166534" font-size="9" font-family="sans-serif">Parque Ibirapuera</text>
-        <!-- Pinos -->
-        <g transform="translate(163,40)">
-          <circle r="10" fill="#0D9488" stroke="white" stroke-width="2.5"/>
-          <circle r="4" fill="white"/>
-        </g>
-        <g transform="translate(280,120)">
-          <circle r="10" fill="#F97316" stroke="white" stroke-width="2.5"/>
-          <circle r="4" fill="white"/>
-        </g>
-      </svg>
-      <!-- Overlay gradiente inferior -->
-      <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
-    </div>
+                <button class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="escolha-de-categoria-e-confirmacao"
+                        onclick="mostrarTela('escolha-de-categoria-e-confirmacao')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Escolher</span>
+                </button>
 
-    <!-- Painel de busca -->
-    <div class="flex-1 bg-white rounded-t-3xl -mt-6 relative z-10 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex flex-col overflow-hidden">
-      <div class="flex justify-center pt-2 pb-1">
-        <div class="w-10 h-1 bg-gray-300 rounded-full"></div>
-      </div>
+                <button class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="buscando-acompanhamento-no-mapa"
+                        onclick="mostrarTela('buscando-acompanhamento-no-mapa')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Mapa</span>
+                </button>
 
-      <!-- Inputs de origem e destino -->
-      <div class="px-5 pt-1 pb-3 space-y-2">
-        <div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
-          <div class="flex flex-col items-center gap-1.5">
-            <div class="w-2.5 h-2.5 rounded-full bg-[#0D9488]"></div>
-            <div class="w-0.5 h-4 bg-gray-300"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-[#F97316]"></div>
-          </div>
-          <div class="flex-1 space-y-3">
-            <div>
-              <input id="inputOrigem" type="text" value="Av. Paulista, 1578 - Bela Vista" class="w-full text-sm font-medium text-gray-800 bg-transparent outline-none" placeholder="Onde você está?"/>
+                <button class="nav-item flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl"
+                        data-nav="chat-passageiro-motorista"
+                        onclick="mostrarTela('chat-passageiro-motorista')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-3.88 8.25-8.673 8.25S3.654 16.556 3.654 12 7.534 3.75 12 3.75s8.673 3.69 8.673 8.25z"/>
+                    </svg>
+                    <span class="text-[10px] font-medium leading-none">Chat</span>
+                </button>
             </div>
-            <div class="relative">
-              <input id="inputDestino" type="text" placeholder="Para onde você vai?" class="w-full text-sm text-gray-500 bg-transparent outline-none placeholder:text-gray-400"/>
-            </div>
-          </div>
-        </div>
-      </div>
+        </nav>
 
-      <!-- Categorias de veículo -->
-      <div class="px-4 pb-2">
-        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-1">Escolha o tipo de corrida</p>
-        <div class="grid grid-cols-3 gap-2">
-          <button onclick="principal_selecionarCategoria('economico')" id="cat-economico" class="cat-btn active flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-[#0D9488] bg-[#0D9488]/5 transition-all duration-200">
-            <svg class="w-8 h-8 text-[#0D9488]" viewBox="0 0 48 48" fill="none"><rect x="6" y="22" width="36" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="12" y="16" width="24" height="6" rx="2" fill="currentColor" opacity="0.3"/><circle cx="14" cy="36" r="3.5" fill="currentColor"/><circle cx="34" cy="36" r="3.5" fill="currentColor"/></svg>
-            <span class="text-[10px] font-bold text-gray-700">Econômico</span>
-            <span class="text-[11px] font-bold text-[#0D9488]">R$ 12,40</span>
-          </button>
-          <button onclick="principal_selecionarCategoria('conforto')" id="cat-conforto" class="cat-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-200 hover:border-gray-300">
-            <svg class="w-8 h-8 text-gray-500" viewBox="0 0 48 48" fill="none"><rect x="4" y="22" width="40" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="10" y="15" width="28" height="7" rx="2" fill="currentColor" opacity="0.3"/><circle cx="12" cy="36" r="3.5" fill="currentColor"/><circle cx="36" cy="36" r="3.5" fill="currentColor"/></svg>
-            <span class="text-[10px] font-bold text-gray-700">Conforto</span>
-            <span class="text-[11px] font-bold text-gray-500">R$ 18,90</span>
-          </button>
-          <button onclick="principal_selecionarCategoria('premium')" id="cat-premium" class="cat-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-200 hover:border-gray-300">
-            <svg class="w-8 h-8 text-gray-500" viewBox="0 0 48 48" fill="none"><rect x="3" y="22" width="42" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/><rect x="9" y="14" width="30" height="8" rx="2" fill="currentColor" opacity="0.3"/><circle cx="11" cy="36" r="3.5" fill="currentColor"/><circle cx="37" cy="36" r="3.5" fill="currentColor"/></svg>
-            <span class="text-[10px] font-bold text-gray-700">Premium</span>
-            <span class="text-[11px] font-bold text-gray-500">R$ 27,50</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Info da corrida -->
-      <div class="mx-4 bg-gray-50 rounded-xl p-3 flex items-center justify-between text-xs text-gray-600 border border-gray-100">
-        <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span>Chegada prevista: <strong class="text-gray-800">18 min</strong></span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2.25l-1.5 5.25H5.25l4.5 3.75-1.75 5.25L12 13.5l4.25 4.5-1.75-5.25 4.5-3.75h-5.25L12 2.25z"/></svg>
-          <span>Avaliação: <strong class="text-gray-800">4,9</strong></span>
-        </div>
-      </div>
-
-      <!-- Botão de solicitar -->
-      <div class="p-4 pt-3 pb-6">
-        <button onclick="principal_solicitarCorrida()" id="btnSolicitar" class="w-full bg-[#0D9488] hover:bg-[#0F766E] active:scale-[0.98] text-white font-bold text-base py-4 rounded-2xl shadow-lg shadow-teal-200 transition-all duration-200 flex items-center justify-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
-          Solicitar GoHop
-        </button>
-      </div>
+        <!-- Conteúdo principal — telas são injetadas aqui -->
+        <main>
+            <!-- TELAS -->
+        </main>
     </div>
-  </div>
 
-  <!-- Modal de confirmação -->
-  <div id="modalConfirmacao" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40">
-    <div class="w-full max-w-[375px] bg-white rounded-t-3xl p-6 pb-8 animate-[slideUp_0.3s_ease-out]">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-          <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5"/></svg>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-gray-800">Corrida solicitada!</h3>
-          <p class="text-xs text-gray-500">Procurando motoristas próximos...</p>
-        </div>
-      </div>
-      <div id="detalhesCorrida" class="bg-gray-50 rounded-xl p-4 space-y-2.5 mb-5">
-        <div class="flex justify-between text-sm"><span class="text-gray-500">Origem</span><span class="font-medium text-gray-800 text-right max-w-[200px]">Av. Paulista, 1578</span></div>
-        <div class="w-px h-4 bg-gray-200 mx-2"></div>
-        <div class="flex justify-between text-sm"><span class="text-gray-500">Destino</span><span class="font-medium text-gray-800 text-right max-w-[200px]" id="destinoConfirmacao">Av. Paulista, 1578</span></div>
-        <div class="w-px h-4 bg-gray-200 mx-2"></div>
-        <div class="flex justify-between text-sm"><span class="text-gray-500">Categoria</span><span class="font-medium text-gray-800" id="categoriaConfirmacao">Econômico</span></div>
-        <div class="w-px h-4 bg-gray-200 mx-2"></div>
-        <div class="flex justify-between text-sm"><span class="text-gray-500">Estimativa</span><span class="font-bold text-[#0D9488]" id="precoConfirmacao">R$ 12,40</span></div>
-      </div>
-      <button onclick="principal_fecharModal()" class="w-full bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold py-3.5 rounded-2xl transition active:scale-[0.98]">
-        Acompanhar corrida
-      </button>
-    </div>
-  </div>
+    <script>
+        function mostrarTela(id) {
+            document.querySelectorAll('[data-tela]').forEach(function (s) {
+                s.classList.toggle('hidden', s.dataset.tela !== id);
+            });
+            document.querySelectorAll('[data-nav]').forEach(function (b) {
+                b.classList.toggle('ativo', b.dataset.nav === id);
+            });
+            window.scrollTo({ top: 0 });
+        }
 
-  <!-- Modal de perfil -->
-  <div id="modalPerfil" class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40">
-    <div class="w-full max-w-[375px] bg-white rounded-t-3xl p-6 pb-8">
-      <div class="flex items-center gap-4 mb-5">
-        <div class="w-14 h-14 rounded-full bg-[#0D9488] flex items-center justify-center text-white text-xl font-bold">MS</div>
-        <div>
-          <h3 class="text-base font-bold text-gray-800">Marcos Silva</h3>
-          <p class="text-xs text-gray-500">marcos.silva@email.com</p>
-          <p class="text-xs text-gray-400">(11) 99876-5432</p>
-        </div>
-      </div>
-      <div class="space-y-1">
-        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 6v11.25A2.25 2.25 0 004.5 19.5z"/></svg> Formas de pagamento
-        </button>
-        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003 1.008c-.253.255-.427.577-.476.914l-.237 1.341c-.041.225.144.443.378.478.234.035.468-.07.644-.248l1.174-1.165a1.125 1.125 0 011.37-.49l1.296 2.247M15 9.75l-3-3m0 0l-3 3m3-3v6m0-6H9m3.75 0h3.75"/></svg> Endereços salvos
-        </button>
-        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-gray-700 transition">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg> Central de ajuda
-        </button>
-        <button onclick="principal_fecharPerfil()" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 flex items-center gap-3 text-sm text-red-600 transition">
-          <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/></svg> Sair
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-    .cat-btn.active { border-color: #0D9488; background: rgba(13,148,136,0.05); }
-  </style>
-
-  <script>
-    const precos = { economico: 'R$ 12,40', conforto: 'R$ 18,90', premium: 'R$ 27,50' };
-    const labels = { economico: 'Econômico', conforto: 'Conforto', premium: 'Premium' };
-    let categoriaAtual = 'economico';
-
-    function principal_selecionarCategoria(cat) {
-      categoriaAtual = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => {
-        b.classList.remove('active');
-        b.classList.add('border-gray-200', 'bg-white');
-        b.classList.remove('border-[#0D9488]', 'bg-[#0D9488]/5');
-        b.querySelector('svg').classList.remove('text-[#0D9488]');
-        b.querySelector('svg').classList.add('text-gray-500');
-        b.querySelectorAll('span').forEach(s => { s.classList.remove('text-[#0D9488]'); s.classList.add('text-gray-500'); });
-      });
-      const btn = document.getElementById('cat-' + cat);
-      btn.classList.add('active');
-      btn.classList.remove('border-gray-200', 'bg-white');
-      btn.classList.add('border-[#0D9488]', 'bg-[#0D9488]/5');
-      btn.querySelector('svg').classList.remove('text-gray-500');
-      btn.querySelector('svg').classList.add('text-[#0D9488]');
-      btn.querySelectorAll('span').forEach(s => { s.classList.remove('text-gray-500'); s.classList.add('text-[#0D9488]'); });
-    }
-
-    function principal_solicitarCorrida() {
-      const origem = document.getElementById('inputOrigem').value || 'Av. Paulista, 1578 - Bela Vista';
-      const destino = document.getElementById('inputDestino').value || 'Não informado';
-      document.getElementById('destinoConfirmacao').textContent = destino;
-      document.getElementById('categoriaConfirmacao').textContent = labels[categoriaAtual];
-      document.getElementById('precoConfirmacao').textContent = precos[categoriaAtual];
-      document.getElementById('modalConfirmacao').classList.remove('hidden');
-    }
-
-    function principal_fecharModal() {
-      document.getElementById('modalConfirmacao').classList.add('hidden');
-    }
-
-    function principal_togglePerfil() {
-      document.getElementById('modalPerfil').classList.remove('hidden');
-    }
-
-    function principal_fecharPerfil() {
-      document.getElementById('modalPerfil').classList.add('hidden');
-    }
-  </script>
-</section>
-
-    <!-- TELAS -->
-
-  </main>
-
-  <!-- Navegação inferior estilo app -->
-  <nav class="fixed bottom-0 left-0 right-0 z-50">
-    <div class="max-w-[375px] mx-auto bg-noite-800/85 backdrop-blur-xl border-t border-white/10 px-2 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-      <div class="flex items-center justify-around">
-        <button data-nav="principal" onclick="mostrarTela('principal')" class="nav-item ativo flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
-          <div class="nav-icon-servicep-1.5 rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <span class="text-[10px] font-medium">Início</span>
-        </button>
-        <button data-nav="corridas" onclick="mostrarTela('corridas')" class="nav-item flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
-          <div class="nav-icon-servicep-1.5 rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-          </div>
-          <span class="text-[10px] font-medium">Corridas</span>
-        </button>
-        <button data-nav="perfil" onclick="mostrarTela('perfil')" class="nav-item flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl">
-          <div class="nav-icon-servicep-1.5 rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <span class="text-[10px] font-medium">Perfil</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <script>
-    function mostrarTela(id) {
-      document.querySelectorAll('[data-tela]').forEach(function(s) {
-        s.classList.toggle('hidden', s.dataset.tela !== id);
-      });
-      document.querySelectorAll('[data-nav]').forEach(function(b) {
-        b.classList.toggle('ativo', b.dataset.nav === id);
-      });
-      window.scrollTo({ top: 0 });
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      mostrarTela('principal');
-    });
-  </script>
-
+        document.addEventListener('DOMContentLoaded', function () {
+            mostrarTela('onboarding-splash-com-identidade-visual');
+        });
+    </script>
 </body>
 </html>
