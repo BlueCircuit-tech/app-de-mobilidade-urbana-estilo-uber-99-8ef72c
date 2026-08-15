@@ -1188,6 +1188,370 @@
       </div>
     </section>
 
+    <section data-tela="escolha-de-categoria-e-confirmacao" class="hidden">
+  <div class="min-h-screen bg-gray-50 flex flex-col" style="max-width:375px;margin:0 auto;">
+
+    <!-- Header -->
+    <header class="bg-white px-4 pt-3 pb-2 flex items-center justify-between shadow-sm sticky top-0 z-10">
+      <button onclick="mostrarTela('home-do-passageiro-solicitar-corrida')" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" aria-label="Voltar">
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <h1 class="text-base font-semibold text-gray-800">Escolha a corrida</h1>
+      <div class="w-9"></div>
+    </header>
+
+    <!-- Rota resumo -->
+    <div class="bg-white mx-3 mt-3 rounded-xl p-3 shadow-sm border border-gray-100">
+      <div class="flex items-start gap-3">
+        <div class="flex flex-col items-center pt-1">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+          <div class="w-px h-10 bg-gray-300 my-0.5"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-medium text-gray-800 leading-tight">Av. Paulista, 1578</p>
+          <p class="text-xs text-gray-400 mt-0.5">Bela Vista, São Paulo</p>
+          <div class="h-px bg-gray-100 my-2.5"></div>
+          <p class="text-sm font-medium text-gray-800 leading-tight">Rua Augusta, 420</p>
+          <p class="text-xs text-gray-400 mt-0.5">Consolação, São Paulo</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1 mt-2 pt-2 border-t border-gray-50">
+        <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-xs text-gray-500">6,2 km · ~15 min</span>
+      </div>
+    </div>
+
+    <!-- Categorias -->
+    <div class="px-3 mt-4">
+      <h2 class="text-sm font-semibold text-gray-700 mb-2.5 px-1">Categorias disponíveis</h2>
+      <div class="space-y-2.5" id="lista-categorias">
+
+        <!-- Econômico -->
+        <button onclick="escolha_de_categoria_e_confirmacao_selecionar(this, 'economico')" class="categoria-btn w-full bg-white rounded-xl p-3.5 border-2 border-emerald-400 shadow-sm flex items-center gap-3.5 transition-all text-left" data-categoria="economico">
+          <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-7 h-7 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-800 text-sm">Econômico</span>
+              <span class="font-bold text-gray-900 text-sm">R$ 14,90</span>
+            </div>
+            <div class="flex items-center justify-between mt-0.5">
+              <span class="text-xs text-gray-400">Até 4 passageiros</span>
+              <span class="text-xs text-gray-400">⏱ 12 min</span>
+            </div>
+          </div>
+          <div class="categoria-radio w-5 h-5 rounded-full border-2 border-emerald-400 flex items-center justify-center flex-shrink-0">
+            <div class="categoria-radio-dot w-2.5 h-2.5 rounded-full bg-emerald-500 hidden"></div>
+          </div>
+        </button>
+
+        <!-- Conforto -->
+        <button onclick="escolha_de_categoria_e_confirmacao_selecionar(this, 'conforto')" class="categoria-btn w-full bg-white rounded-xl p-3.5 border-2 border-gray-200 shadow-sm flex items-center gap-3.5 transition-all text-left" data-categoria="conforto">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-7 h-7 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-800 text-sm">Conforto</span>
+              <span class="font-bold text-gray-900 text-sm">R$ 22,50</span>
+            </div>
+            <div class="flex items-center justify-between mt-0.5">
+              <span class="text-xs text-gray-400">Carros mais novos · ar condicionado</span>
+              <span class="text-xs text-gray-400">⏱ 8 min</span>
+            </div>
+          </div>
+          <div class="categoria-radio w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+            <div class="categoria-radio-dot w-2.5 h-2.5 rounded-full bg-blue-500 hidden"></div>
+          </div>
+        </button>
+
+        <!-- SUV -->
+        <button onclick="escolha_de_categoria_e_confirmacao_selecionar(this, 'suv')" class="categoria-btn w-full bg-white rounded-xl p-3.5 border-2 border-gray-200 shadow-sm flex items-center gap-3.5 transition-all text-left" data-categoria="suv">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-7 h-7 text-amber-600" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-800 text-sm">SUV</span>
+              <span class="font-bold text-gray-900 text-sm">R$ 28,90</span>
+            </div>
+            <div class="flex items-center justify-between mt-0.5">
+              <span class="text-xs text-gray-400">Até 6 passageiros · espaço bagageiro</span>
+              <span class="text-xs text-gray-400">⏱ 10 min</span>
+            </div>
+          </div>
+          <div class="categoria-radio w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+            <div class="categoria-radio-dot w-2.5 h-2.5 rounded-full bg-amber-500 hidden"></div>
+          </div>
+        </button>
+
+        <!-- Moto Taxi -->
+        <button onclick="escolha_de_categoria_e_confirmacao_selecionar(this, 'moto')" class="categoria-btn w-full bg-white rounded-xl p-3.5 border-2 border-gray-200 shadow-sm flex items-center gap-3.5 transition-all text-left" data-categoria="moto">
+          <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-7 h-7 text-rose-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19.5 9.5c-1.03 0-1.9.62-2.29 1.5h-2.92L13 7h-2l-1.29 4h-2.54L5.5 5.5C5.18 5.18 4.76 5 4.33 5H2v2h2.33l1.17 4.17V17h1.67v-2H8v2h8v-2h1.67v-2h-2.92c.39-.88 1.26-1.5 2.29-1.5.83 0 1.5.67 1.5 1.5S20.33 9.5 19.5 9.5zM6.5 13c-.83 0-1.5-.67-1.5-1.5S5.67 10 6.5 10s1.5.67 1.5 1.5S7.33 13 6.5 13zm11 0c-.83 0-1.5-.67-1.5-1.5S16.67 10 17.5 10s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-gray-800 text-sm">Moto Táxi</span>
+              <span class="font-bold text-gray-900 text-sm">R$ 7,90</span>
+            </div>
+            <div class="flex items-center justify-between mt-0.5">
+              <span class="text-xs text-gray-400">1 passageiro · mais rápido</span>
+              <span class="text-xs text-gray-400">⏱ 5 min</span>
+            </div>
+          </div>
+          <div class="categoria-radio w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+            <div class="categoria-radio-dot w-2.5 h-2.5 rounded-full bg-rose-500 hidden"></div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Forma de pagamento -->
+    <div class="px-3 mt-4">
+      <h2 class="text-sm font-semibold text-gray-700 mb-2.5 px-1">Forma de pagamento</h2>
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <button onclick="escolha_de_categoria_e_confirmacao_toggle_pagamento()" class="w-full flex items-center gap-3 p-3.5 hover:bg-gray-50 transition-colors text-left">
+          <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
+          </div>
+          <div class="flex-1">
+            <span class="text-sm font-medium text-gray-800" id="pagamento-label">Cartão de Crédito</span>
+            <span class="text-xs text-gray-400 block">••• •••• •••• 4521</span>
+          </div>
+          <svg id="pagamento-chevron" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <!-- Opções de pagamento (expandível) -->
+        <div id="pagamento-opcoes" class="hidden border-t border-gray-100">
+          <button onclick="escolha_de_categoria_e_confirmacao_selecionar_pagamento('Cartão de Crédito', '••• •••• •••• 4521')" class="w-full flex items-center gap-3 p-3.5 hover:bg-gray-50 transition-colors text-left border-l-4 border-blue-500 bg-blue-50/50">
+            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            <div class="flex-1">
+              <span class="text-sm font-medium text-gray-800">Cartão de Crédito</span>
+              <span class="text-xs text-gray-400 block">••• •••• •••• 4521</span>
+            </div>
+            <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </button>
+          <button onclick="escolha_de_categoria_e_confirmacao_selecionar_pagamento('Pix', 'Chave aleatória')" class="w-full flex items-center gap-3 p-3.5 hover:bg-gray-50 transition-colors text-left border-l-4 border-transparent">
+            <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="text-white font-bold text-xs">PIX</span>
+            </div>
+            <div class="flex-1">
+              <span class="text-sm font-medium text-gray-800">Pix</span>
+              <span class="text-xs text-gray-400 block">Chave aleatória</span>
+            </div>
+          </button>
+          <button onclick="escolha_de_categoria_e_confirmacao_selecionar_pagamento('Dinheiro', '')" class="w-full flex items-center gap-3 p-3.5 hover:bg-gray-50 transition-colors text-left border-l-4 border-transparent">
+            <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="text-white font-bold text-xs">R$</span>
+            </div>
+            <div class="flex-1">
+              <span class="text-sm font-medium text-gray-800">Dinheiro</span>
+              <span class="text-xs text-gray-400 block">Pagamento em espécie</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copos -->
+    <div class="px-3 mt-4 mb-3">
+      <h2 class="text-sm font-semibold text-gray-700 mb-2.5 px-1">Cupons e benefícios</h2>
+      <button onclick="escolha_de_categoria_e_confirmacao_toggle_cupons()" class="w-full bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 flex items-center gap-3 text-left">
+        <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+        </div>
+        <div class="flex-1">
+          <span class="text-sm font-medium text-gray-800">Cupom de primeira viagem</span>
+          <span class="text-xs text-emerald-600 font-medium block">R$ 5,00 de desconto</span>
+        </div>
+        <div id="cupom-check" class="w-5 h-5 rounded-full border-2 border-emerald-500 bg-emerald-500 flex items-center justify-center">
+          <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+      </button>
+    </div>
+
+    <!-- Resumo e botão -->
+    <div class="mt-auto px-3 pb-4 pt-2 bg-white border-t border-gray-100 sticky bottom-0">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <span class="text-xs text-gray-400">Total estimado</span>
+          <span class="text-xl font-bold text-gray-900 ml-2" id="valor-total">R$ 14,90</span>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-gray-400">Com desconto</span>
+          <span class="text-sm font-semibold text-emerald-600 ml-1" id="valor-com-desconto">R$ 9,90</span>
+        </div>
+      </div>
+      <button onclick="escolha_de_categoria_e_confirmacao_confirmar()" id="btn-confirmar" class="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-semibold text-base py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Confirmar solicitação
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Toast de confirmação -->
+  <div id="escolha-toast" class="fixed inset-0 z-50 flex items-end justify-center pointer-events-none" style="max-width:375px;margin:0 auto;left:50%;transform:translateX(-50%);">
+    <div id="escolha-toast-content" class="pointer-events-auto w-full mx-3 mb-6 bg-gray-900 text-white rounded-2xl p-4 shadow-2xl translate-y-20 opacity-0 transition-all duration-300">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold">Corrida solicitada!</p>
+          <p class="text-xs text-gray-300">Procurando motorista próximo...</p>
+        </div>
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-1.5 mt-3 overflow-hidden">
+        <div id="escolha-progress" class="bg-emerald-400 h-full rounded-full transition-all duration-1000" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var categoriaSelecionada = 'economico';
+      var cupomAtivo = true;
+      var pagamentoSelecionado = 'Cartão de Crédito';
+      var expandindoPagamento = false;
+
+      var precos = {
+        economico: { preco: 14.90, tempo: 12, label: 'Econômico', cor: 'emerald', dot: 'bg-emerald-500' },
+        conforto:  { preco: 22.50, tempo: 8,  label: 'Conforto', cor: 'blue', dot: 'bg-blue-500' },
+        suv:       { preco: 28.90, tempo: 10, label: 'SUV', cor: 'amber', dot: 'bg-amber-500' },
+        moto:      { preco: 7.90,  tempo: 5,  label: 'Moto Táxi', cor: 'rose', dot: 'bg-rose-500' }
+      };
+
+      window.escolha_de_categoria_e_confirmacao_selecionar = function(btn, cat) {
+        categoriaSelecionada = cat;
+        var botoes = document.querySelectorAll('.categoria-btn');
+        botoes.forEach(function(b) {
+          b.classList.remove('border-emerald-400','border-blue-500','border-amber-400','border-rose-400');
+          b.classList.add('border-gray-200');
+          b.querySelector('.categoria-radio').classList.remove('border-emerald-400','border-blue-500','border-amber-400','border-rose-500');
+          b.querySelector('.categoria-radio').classList.add('border-gray-300');
+          b.querySelector('.categoria-radio-dot').classList.add('hidden');
+        });
+        var cores = { economico: 'emerald', conforto: 'blue', suv: 'amber', moto: 'rose' };
+        var cor = cores[cat];
+        btn.classList.remove('border-gray-200');
+        btn.classList.add('border-' + cor + '-400');
+        var radio = btn.querySelector('.categoria-radio');
+        radio.classList.remove('border-gray-300');
+        radio.classList.add('border-' + cor + '-400');
+        radio.querySelector('.categoria-radio-dot').classList.remove('hidden');
+        radio.querySelector('.categoria-radio-dot').classList.add('bg-' + cor + '-500');
+
+        var preco = precos[cat].preco;
+        var desconto = cupomAtivo ? 5.00 : 0;
+        var total = Math.max(0, preco - desconto);
+        document.getElementById('valor-total').textContent = 'R$ ' + preco.toFixed(2).replace('.', ',');
+        document.getElementById('valor-com-desconto').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+      };
+
+      window.escolha_de_categoria_e_confirmacao_toggle_pagamento = function() {
+        expandindoPagamento = !expandindoPagamento;
+        var opcoes = document.getElementById('pagamento-opcoes');
+        var chevron = document.getElementById('pagamento-chevron');
+        if (expandindoPagamento) {
+          opcoes.classList.remove('hidden');
+          chevron.style.transform = 'rotate(180deg)';
+        } else {
+          opcoes.classList.add('hidden');
+          chevron.style.transform = 'rotate(0deg)';
+        }
+      };
+
+      window.escolha_de_categoria_e_confirmacao_selecionar_pagamento = function(nome, info) {
+        pagamentoSelecionado = nome;
+        document.getElementById('pagamento-label').textContent = nome;
+        var botoes = document.querySelectorAll('#pagamento-opcoes button');
+        botoes.forEach(function(b) {
+          b.classList.remove('border-blue-500', 'bg-blue-50/50');
+          b.classList.add('border-transparent');
+          var check = b.querySelector('svg:last-child');
+          if (check && check.getAttribute('fill') === 'currentColor') check.parentElement.remove();
+        });
+        var primeiro = botoes[0];
+        if (primeiro) {
+          primeiro.classList.remove('border-transparent');
+          primeiro.classList.add('border-blue-500', 'bg-blue-50/50');
+          var marcador = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          marcador.setAttribute('class', 'w-5 h-5 text-blue-600');
+          marcador.setAttribute('fill', 'currentColor');
+          marcador.setAttribute('viewBox', '0 0 24 24');
+          var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z');
+          marcador.appendChild(path);
+          primeiro.appendChild(marcador);
+        }
+        setTimeout(function() {
+          expandindoPagamento = false;
+          document.getElementById('pagamento-opcoes').classList.add('hidden');
+          document.getElementById('pagamento-chevron').style.transform = 'rotate(0deg)';
+        }, 300);
+      };
+
+      window.escolha_de_categoria_e_confirmacao_toggle_cupons = function() {
+        cupomAtivo = !cupomAtivo;
+        var check = document.getElementById('cupom-check');
+        if (cupomAtivo) {
+          check.classList.remove('bg-gray-100', 'border-gray-300');
+          check.classList.add('bg-emerald-500', 'border-emerald-500');
+          check.innerHTML = '<svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+        } else {
+          check.classList.remove('bg-emerald-500', 'border-emerald-500');
+          check.classList.add('bg-gray-100', 'border-gray-300');
+          check.innerHTML = '';
+        }
+        var preco = precos[categoriaSelecionada].preco;
+        var desconto = cupomAtivo ? 5.00 : 0;
+        var total = Math.max(0, preco - desconto);
+        document.getElementById('valor-total').textContent = 'R$ ' + preco.toFixed(2).replace('.', ',');
+        document.getElementById('valor-com-desconto').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        if (!cupomAtivo) {
+          document.getElementById('valor-com-desconto').classList.add('line-through', 'text-gray-400');
+          document.getElementById('valor-com-desconto').classList.remove('text-emerald-600');
+        } else {
+          document.getElementById('valor-com-desconto').classList.remove('line-through', 'text-gray-400');
+          document.getElementById('valor-com-desconto').classList.add('text-emerald-600');
+        }
+      };
+
+      window.escolha_de_categoria_e_confirmacao_confirmar = function() {
+        var btn = document.getElementById('btn-confirmar');
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Solicitando...';
+        btn.classList.remove('bg-emerald-500', 'hover:bg-emerald-600', 'shadow-emerald-500/25');
+        btn.classList.add('bg-emerald-400');
+
+        var toast = document.getElementById('escolha-toast-content');
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        var progress = document.getElementById('escolha-progress');
+        setTimeout(function() { progress.style.width = '60%'; }, 200);
+        setTimeout(function() { progress.style.width = '100%'; }, 700);
+
+        setTimeout(function() {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-20', 'opacity-0');
+          progress.style.width = '0%';
+          btn.disabled = false;
+          btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Confirmar solicitação';
+          btn.classList.add('bg-emerald-500', 'hover:bg-emerald-600');
+          btn.classList.remove('bg-emerald-400');
+          mostrarTela('buscando-acompanhamento-no-mapa');
+        }, 1800);
+      };
+    })();
+  </script>
+</section>
+
     <!-- TELAS -->
         </main>
     </div>
