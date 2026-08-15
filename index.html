@@ -1552,6 +1552,304 @@
   </script>
 </section>
 
+    <section data-tela="buscando-acompanhamento-no-mapa" class="hidden">
+    <!-- Status bar simulado -->
+    <div class="h-11 bg-[#0D0D0D] flex items-center justify-between px-5 pt-1">
+        <span class="text-white text-xs font-semibold">9:41</span>
+        <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-8-8l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 4.92 8.87 4.92 1 9z"/></svg>
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.33-.6 1.33-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+    </div>
+
+    <!-- Mapa simulado -->
+    <div class="relative w-full h-[340px] overflow-hidden">
+        <!-- Fundo do mapa (ruas simuladas com SVG) -->
+        <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cor de fundo -->
+            <rect width="375" height="340" fill="#E8E4DB"/>
+
+            <!-- Ruas -->
+            <rect x="0" y="120" width="375" height="20" fill="#F5F2EB" rx="0"/>
+            <rect x="0" y="220" width="375" height="16" fill="#F5F2EB" rx="0"/>
+            <rect x="140" y="0" width="16" height="340" fill="#F5F2EB" rx="0"/>
+            <rect x="260" y="0" width="12" height="340" fill="#F5F2EB" rx="0"/>
+            <rect x="0" y="60" width="375" height="14" fill="#F5F2EB" rx="0"/>
+            <rect x="0" y="280" width="375" height="14" fill="#F5F2EB" rx="0"/>
+            <rect x="80" y="0" width="10" height="340" fill="#F5F2EB" rx="0"/>
+
+            <!-- Blocos de quadra -->
+            <rect x="0" y="0" width="80" height="60" fill="#DDD9CF" rx="2"/>
+            <rect x="90" y="0" width="50" height="60" fill="#DDD9CF" rx="2"/>
+            <rect x="156" y="0" width="104" height="120" fill="#DDD9CF" rx="2"/>
+            <rect x="272" y="0" width="103" height="120" fill="#DDD9CF" rx="2"/>
+            <rect x="0" y="140" width="140" height="80" fill="#DDD9CF" rx="2"/>
+            <rect x="0" y="74" width="140" height="46" fill="#DDD9CF" rx="2"/>
+            <rect x="156" y="74" width="104" height="46" fill="#DDD9CF" rx="2"/>
+            <rect x="272" y="74" width="103" height="46" fill="#DDD9CF" rx="2"/>
+            <rect x="156" y="236" width="104" height="44" fill="#DDD9CF" rx="2"/>
+            <rect x="272" y="236" width="103" height="44" fill="#DDD9CF" rx="2"/>
+            <rect x="0" y="294" width="80" height="46" fill="#DDD9CF" rx="2"/>
+            <rect x="90" y="294" width="50" height="46" fill="#DDD9CF" rx="2"/>
+
+            <!-- Nomes de ruas -->
+            <text x="50" y="134" font-size="7" fill="#9CA3AF" text-anchor="middle">Rua Augusta</text>
+            <text x="50" y="234" font-size="7" fill="#9CA3AF" text-anchor="middle">Av. Paulista</text>
+            <text x="195" y="174" font-size="7" fill="#9CA3AF" text-anchor="middle">Rua Oscar Freire</text>
+            <text x="196" y="294" font-size="7" fill="#9CA3AF" text-anchor="middle">Rua Haddock Lobo</text>
+            <text x="147" y="90" font-size="7" fill="#9CA3AF" text-anchor="middle" transform="rotate(-90,147,90)">Al. Santos</text>
+            <text x="267" y="180" font-size="7" fill="#9CA3AF" text-anchor="middle" transform="rotate(-90,267,180)">R. Pe. João Manoel</text>
+        </svg>
+
+        <!-- Ponto de embarque (origem) -->
+        <div class="absolute" style="bottom: 90px; left: 45px;" id="buscando_acompanhamento_ponto_embarque">
+            <div class="relative">
+                <div class="w-10 h-10 bg-[#E63946] rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-[#0D0D0D] text-white text-[10px] px-2 py-0.5 rounded-full font-semibold whitespace-nowrap">Embarque</div>
+            </div>
+        </div>
+
+        <!-- Ponto de destino -->
+        <div class="absolute" style="bottom: 180px; right: 35px;" id="buscando_acompanhamento_ponto_destino">
+            <div class="relative">
+                <div class="w-10 h-10 bg-[#1B9AAA] rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-[#0D0D0D] text-white text-[10px] px-2 py-0.5 rounded-full font-semibold whitespace-nowrap">Destino</div>
+            </div>
+        </div>
+
+        <!-- Carro do motorista (animado) -->
+        <div class="absolute transition-all duration-1000" id="buscando_acompanhamento_carro" style="bottom: 120px; left: 100px;">
+            <div class="relative">
+                <div class="w-12 h-12 bg-[#FFD60A] rounded-2xl flex items-center justify-center shadow-xl border-2 border-[#0D0D0D]">
+                    <svg class="w-7 h-7 text-[#0D0D0D]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                </div>
+                <!-- Indicador de pulsação -->
+                <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+            </div>
+        </div>
+
+        <!-- Linha de rota tracejada -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:5;">
+            <path d="M 150 130 Q 180 160 200 150 T 280 200" stroke="#1B9AAA" stroke-width="3" fill="none" stroke-dasharray="8 6" opacity="0.7"/>
+        </svg>
+
+        <!-- Botão voltar no canto superior esquerdo -->
+        <button onclick="mostrarTela('home-do-passageiro-solicitar-corrida')" class="absolute top-3 left-4 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+            <svg class="w-5 h-5 text-[#0D0D0D]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <!-- Indicador de busca -->
+        <div class="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-[#0D0D0D]/80 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full flex items-center gap-2" id="buscando_acompanhamento_status_busca">
+            <div class="w-2.5 h-2.5 bg-[#FFD60A] rounded-full animate-pulse"></div>
+            Buscando motorista próximo...
+        </div>
+
+        <!-- Resumo flutuante superior direito -->
+        <div class="absolute top-14 right-3 z-20 bg-white rounded-xl shadow-lg p-2.5 w-[140px]" id="buscando_acompanhamento_resumo_viagem">
+            <div class="flex items-center gap-1.5 mb-1">
+                <svg class="w-3.5 h-3.5 text-[#E63946]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span class="text-[10px] text-gray-500 truncate">R. Haddock Lobo, 120</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1B9AAA]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span class="text-[10px] text-gray-500 truncate">Av. Paulista, 1578</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card inferior com dados do motorista -->
+    <div class="bg-white rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-5 pt-5 pb-6 -mt-4 relative z-10">
+        <!-- Barra indicadora -->
+        <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-4"></div>
+
+        <!-- Tempo estimado e distância -->
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-3xl font-bold text-[#0D0D0D]" id="buscando_acompanhamento_tempo">4</span>
+                    <span class="text-sm font-semibold text-[#0D0D0D]">min</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-0.5">previsão de chegada</p>
+            </div>
+            <div class="text-right">
+                <div class="flex items-baseline gap-1">
+                    <span class="text-3xl font-bold text-[#0D0D0D]">1.8</span>
+                    <span class="text-sm font-semibold text-[#0D0D0D]">km</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-0.5">de distância</p>
+            </div>
+            <div class="h-10 w-px bg-gray-100"></div>
+            <div class="text-right">
+                <div class="flex items-baseline gap-1">
+                    <span class="text-[10px] text-gray-400 font-medium">R$</span>
+                    <span class="text-xl font-bold text-[#E63946]">14,50</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-0.5">valor estimado</p>
+            </div>
+        </div>
+
+        <!-- Linha divisória -->
+        <div class="border-t border-gray-100 mb-4"></div>
+
+        <!-- Dados do motorista e veículo -->
+        <div class="flex items-start gap-3.5 mb-4">
+            <!-- Avatar do motorista -->
+            <div class="relative flex-shrink-0">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#1B9AAA] to-[#0D7377] flex items-center justify-center shadow-md">
+                    <span class="text-white text-lg font-bold">RC</span>
+                </div>
+                <div class="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-green-400 rounded-full border-2 border-white flex items-center justify-center">
+                    <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+            </div>
+
+            <!-- Nome, avaliação e dados do veículo -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-0.5">
+                    <h3 class="text-base font-bold text-[#0D0D0D] truncate">Rafael Costa</h3>
+                    <span class="bg-[#FFD60A] text-[#0D0D0D] text-[10px] font-bold px-1.5 py-0.5 rounded-md flex items-center gap-0.5 flex-shrink-0">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        4.9
+                    </span>
+                </div>
+                <p class="text-xs text-gray-400 mb-2">243 corridas realizadas</p>
+
+                <!-- Veículo -->
+                <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2">
+                    <div class="w-9 h-9 bg-[#0D0D0D] rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-[#FFD60A]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-bold text-[#0D0D0D]">Fiat Argo Drive 1.3</p>
+                        <p class="text-xs text-gray-400 font-medium">Prata • Placa <span class="text-[#0D0D0D]">ABC-1D23</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="flex items-center gap-3">
+            <!-- Botão ligar -->
+            <button onclick="buscando_acompanhamento_no_mapa_ligar_motorista()" class="flex-1 bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 shadow-md transition-all">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                Ligar
+            </button>
+
+            <!-- Botão chat -->
+            <button onclick="mostrarTela('chat-passageiro-motorista')" class="flex-1 bg-[#0D0D0D] hover:bg-gray-800 active:scale-[0.97] text-white font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 shadow-md transition-all">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+                Chat
+            </button>
+
+            <!-- Botão cancelar -->
+            <button onclick="buscando_acompanhamento_no_mapa_cancelar_corrida()" class="w-14 h-14 bg-red-50 hover:bg-red-100 active:scale-[0.95] rounded-2xl flex items-center justify-center shadow-sm transition-all" title="Cancelar corrida">
+                <svg class="w-6 h-6 text-[#E63946]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <!-- Status da viagem -->
+        <div class="mt-3 bg-[#FFF8E1] rounded-xl px-3 py-2.5 flex items-center gap-2" id="buscando_acompanhamento_status_viagem">
+            <svg class="w-4 h-4 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <p class="text-xs text-amber-800 font-medium">Motorista a caminho do ponto de embarque</p>
+        </div>
+    </div>
+
+    <script>
+        // Atualiza o tempo estimado periodicamente (simulação)
+        function buscando_acompanhamento_no_mapa_atualizar_tempo() {
+            const tempoEl = document.getElementById('buscando_acompanhamento_tempo');
+            if (!tempoEl) return;
+            let tempo = parseInt(tempoEl.textContent);
+            if (tempo > 1) {
+                tempoEl.textContent = tempo - 1;
+            } else {
+                // Simula chegada do motorista: navega para chat
+                tempoEl.textContent = '0';
+                const statusEl = document.getElementById('buscando_acompanhamento_status_busca');
+                if (statusEl) {
+                    statusEl.innerHTML = '<div class="w-2.5 h-2.5 bg-green-400 rounded-full"></div> Motorista chegou!';
+                }
+                const statusViagem = document.getElementById('buscando_acompanhamento_status_viagem');
+                if (statusViagem) {
+                    statusViagem.className = 'mt-3 bg-green-50 rounded-xl px-3 py-2.5 flex items-center gap-2';
+                    statusViagem.innerHTML = '<svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><p class="text-xs text-green-800 font-medium">Motorista chegou! Aguardando embarque.</p>';
+                }
+            }
+        }
+
+        // Inicia contador de tempo
+        setInterval(buscando_acompanhamento_no_mapa_atualizar_tempo, 10000);
+
+        // Anima movimento do carro (simulação)
+        function buscando_acompanhamento_no_mapa_animar_carro() {
+            const carro = document.getElementById('buscando_acompanhamento_carro');
+            if (!carro) return;
+            let posX = 100;
+            const destinoX = 290;
+            const intervalo = setInterval(() => {
+                if (posX >= destinoX) {
+                    clearInterval(intervalo);
+                    return;
+                }
+                posX += 15;
+                carro.style.left = posX + 'px';
+            }, 1500);
+        }
+
+        // Inicia animação após 1s
+        setTimeout(buscando_acompanhamento_no_mapa_animar_carro, 1000);
+
+        // Ação: ligar para o motorista
+        function buscando_acompanhamento_no_mapa_ligar_motorista() {
+            const btn = event.currentTarget;
+            btn.innerHTML = '<svg class="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> Ligando...';
+            btn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            btn.classList.add('bg-green-400');
+
+            setTimeout(() => {
+                btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> Ligar';
+                btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                btn.classList.remove('bg-green-400');
+            }, 3000);
+        }
+
+        // Ação: cancelar corrida
+        function buscando_acompanhamento_no_mapa_cancelar_corrida() {
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-6';
+            overlay.id = 'buscando_acompanhamento_modal_cancelar';
+            overlay.innerHTML = `
+                <div class="bg-white rounded-3xl p-6 w-full max-w-[320px] shadow-2xl animate-[scaleIn_0.2s_ease-out]">
+                    <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-[#E63946]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-[#0D0D0D] mb-2">Cancelar corrida?</h3>
+                    <p class="text-sm text-gray-500 text-center mb-6">Se você cancelar agora, poderá haver uma taxa de cancelamento.</p>
+                    <div class="flex gap-3">
+                        <button onclick="document.getElementById('buscando_acompanhamento_modal_cancelar').remove()" class="flex-1 bg-gray-100 hover:bg-gray-200 active:scale-[0.97] text-[#0D0D0D] font-bold py-3 rounded-2xl transition-all">Voltar</button>
+                        <button onclick="buscando_acompanhamento_no_mapa_confirmar_cancelamento()" class="flex-1 bg-[#E63946] hover:bg-red-600 active:scale-[0.97] text-white font-bold py-3 rounded-2xl transition-all">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        function buscando_acompanhamento_no_mapa_confirmar_cancelamento() {
+            const modal = document.getElementById('buscando_acompanhamento_modal_cancelar');
+            if (modal) modal.remove();
+
+            // Navega para home após cancelar
+            setTimeout(() => {
+                mostrarTela('home-do-passageiro-solicitar-corrida');
+            }, 400);
+        }
+    </script>
+</section>
+
     <!-- TELAS -->
         </main>
     </div>
